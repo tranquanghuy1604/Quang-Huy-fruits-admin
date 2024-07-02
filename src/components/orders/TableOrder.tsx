@@ -7,10 +7,12 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useQueryClient } from 'react-query';
 import FormEditOrder from './FormEditOrder';
+import { getTagColor } from '@/utils/getTextStatus';
 
 interface DataType {
   _id: string;
   customer: any;
+  shipper_name: any;
   payment_method: string;
   note: string;
   created_at: string;
@@ -34,7 +36,7 @@ function TableOrder() {
       total: pagination.total,
     });
   };
-
+  console.log(listOrder);
   const handleConfirmOrder = (orderId: any) => {
     changeDelivery(
       { _id: orderId },
@@ -81,6 +83,13 @@ function TableOrder() {
       render: (customer) => customer.fullname,
     },
     {
+      title: 'Ho ten shipper',
+      dataIndex: 'shipper_name',
+      key: 'shipper_name',
+      render: (shipper_name) =>
+        shipper_name !== null ? `${shipper_name.first_name} ${shipper_name.last_name}` : 'Chưa có người nhận',
+    },
+    {
       title: 'Kieu thanh toan',
       dataIndex: 'payment_method',
       key: 'payment_method',
@@ -100,6 +109,7 @@ function TableOrder() {
       title: 'Trang thai',
       dataIndex: 'status',
       key: 'status',
+      render: (status) => getTagColor(status),
     },
     {
       title: 'Tổng tiền',
