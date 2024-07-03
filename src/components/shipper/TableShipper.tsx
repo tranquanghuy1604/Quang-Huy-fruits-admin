@@ -1,9 +1,10 @@
 'use client';
 import { useMutationDelete, useQueryGetListShipper, useQueryGetListUser } from '@/api/userApi';
 import type { TableProps } from 'antd';
-import { Button, Space, Spin, Table } from 'antd';
+import { Button, Modal, Space, Spin, Table } from 'antd';
 import { useState } from 'react';
 import { useQueryClient } from 'react-query';
+import FormEditShipper from './FormEditShipper';
 
 interface DataType {
   _id: number;
@@ -14,6 +15,8 @@ interface DataType {
 }
 
 function TableShipper() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedShipper, setSelectedShipper] = useState<DataType | null>(null);
   const { data, isLoading } = useQueryGetListShipper();
   const listShipper = data as any;
   const { mutate: deleteUser } = useMutationDelete();
@@ -24,6 +27,10 @@ function TableShipper() {
         queryClient.invalidateQueries(['list-shipper']);
       },
     });
+  };
+  const handleEditShipper = (record: DataType) => {
+    setSelectedShipper(record);
+    setIsModalOpen(true);
   };
 
   const columns: TableProps<DataType>['columns'] = [
@@ -36,6 +43,7 @@ function TableShipper() {
       title: 'User Name',
       dataIndex: 'userName',
       key: 'userName',
+      render: (_, record: any) => record?.last_name + ' ' + record?.first_name,
     },
     {
       title: 'Số điện thoại',
@@ -55,7 +63,9 @@ function TableShipper() {
       className: 'max-w-[150px]',
       render: (_, record) => (
         <Space size='middle'>
-          <Button type='primary'>Sửa</Button>
+          <Button type='primary' onClick={() => handleEditShipper(record)}>
+            Sửa
+          </Button>
           <Button type='primary' onClick={() => handleDeleteUser(record._id)}>
             Xóa
           </Button>
@@ -93,6 +103,18 @@ function TableShipper() {
           }
         }
       />
+      <Modal
+        destroyOnClose={true}
+        centered
+        title='Sửa Sản Phẩm'
+        open={isModalOpen}
+        footer={null}
+        onOk={() => setIsModalOpen(false)}
+        onCancel={() => setIsModalOpen(false)}
+        width={600}
+      >
+        <FormEditShipper item={selectedShipper} handleCancel={() => setIsModalOpen(false)} />
+      </Modal>
     </div>
   );
 }

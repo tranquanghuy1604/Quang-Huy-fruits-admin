@@ -1,13 +1,8 @@
 import { useMutation, useQuery } from 'react-query';
 import apiClient from './apiClient';
 
-export interface ParamsLogin {
-  email: string;
-  password: string;
-}
-
 const userApi = {
-  login(params: ParamsLogin) {
+  login(params: any) {
     const url = '/user/login-admin';
     return apiClient.post(url, params);
   },
@@ -23,6 +18,14 @@ const userApi = {
     const url = `/user/get-list-shipper`;
     return apiClient.get(url);
   },
+  createShipper(params: any) {
+    const url = `/user/create-shipper`;
+    return apiClient.post(url, params);
+  },
+  editShipper(shipperId: any, params: any) {
+    const url = `/user/${shipperId}`;
+    return apiClient.put(url, params);
+  },
 };
 
 export const useQueryGetListUser = () => {
@@ -34,11 +37,18 @@ export const useMutationDelete = () => {
 };
 
 export const useMutationLogin = () => {
-  return useMutation((params: ParamsLogin) => userApi.login(params));
+  return useMutation((params: any) => userApi.login(params));
+};
+export const useMutationCreateShipper = () => {
+  return useMutation((params: any) => userApi.createShipper(params));
 };
 
 export const useQueryGetListShipper = () => {
   return useQuery(['list-shipper'], userApi.getShipper);
+};
+
+export const useMutationEditShipper = (shipperId: any) => {
+  return useMutation((params: any) => userApi.editShipper(shipperId, params));
 };
 
 export default userApi;
