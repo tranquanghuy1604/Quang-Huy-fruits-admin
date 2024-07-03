@@ -16,12 +16,12 @@ const userApi = {
     return apiClient.delete(url);
   },
   getUser() {
-    const url = `/user`;
+    const url = `/user/get-list-user`;
     return apiClient.get(url);
   },
 };
 
-export const useQueryLogin = () => {
+export const useQueryGetListUser = () => {
   return useQuery(['list-user'], userApi.getUser);
 };
 

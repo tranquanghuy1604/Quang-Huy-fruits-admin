@@ -1,5 +1,5 @@
 'use client';
-import { useMutationDelete, useQueryLogin } from '@/api/userApi';
+import { useMutationDelete, useQueryGetListUser } from '@/api/userApi';
 import type { TableProps } from 'antd';
 import { Button, Space, Spin, Table } from 'antd';
 import { useState } from 'react';
@@ -9,13 +9,15 @@ interface DataType {
   _id: number;
   userName: string;
   email: string;
+  phone: string;
+  gender: string;
+  address: string;
   action?: any;
 }
 
 function TableUser() {
-  const { data, isLoading } = useQueryLogin();
-  const listData = data as any;
-  const dataUser = listData?.users;
+  const { data, isLoading } = useQueryGetListUser();
+  const dataUser = data as any;
   console.log(dataUser);
   const queryClient = useQueryClient();
   const { mutate: deleteUser } = useMutationDelete();
@@ -28,7 +30,7 @@ function TableUser() {
   };
   const columns: TableProps<DataType>['columns'] = [
     {
-      title: 'User id',
+      title: 'Mã khách hàng',
       dataIndex: '_id',
       key: '_id',
     },
@@ -36,12 +38,31 @@ function TableUser() {
       title: 'User Name',
       dataIndex: 'userName',
       key: 'userName',
+      render: (_, record: any) => record?.last_name + ' ' + record?.first_name,
+    },
+    {
+      title: 'Số điện thoại',
+      dataIndex: 'phone',
+      key: 'phone',
     },
     {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
     },
+    {
+      title: 'Giới tính',
+      dataIndex: 'gender',
+      key: 'gender',
+      render: (_, record: any) => (record?.gender === 'male' ? 'Nam' : 'Nữ'),
+    },
+    {
+      title: 'Địa chỉ',
+      dataIndex: 'address',
+      key: 'address',
+      render: (_, record: any) => record?.ward + ', ' + record?.province,
+    },
+
     {
       title: 'Action',
       key: 'action',
@@ -75,7 +96,7 @@ function TableUser() {
         pagination={{
           current: pagination.current,
           pageSize: pagination.pageSize,
-          total: listData?.total,
+          total: dataUser?.total,
         }}
         loading={
           isLoading && {
