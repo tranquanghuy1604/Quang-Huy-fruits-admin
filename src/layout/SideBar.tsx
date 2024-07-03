@@ -31,22 +31,28 @@ export const SideBar: React.FC = () => {
           <span>Người dùng</span>
         </Link>
       </Menu.Item>
-      <Menu.Item key='matchs'>
+      <Menu.Item key='order'>
         <Link href={routerConstants.orders}>
           <TableOutlined />
           <span>Đơn hàng</span>
         </Link>
       </Menu.Item>
-      <Menu.Item key='seasons'>
+      <Menu.Item key='promotion'>
         <Link href={routerConstants.promotion}>
           <TableOutlined />
           <span>Khuyến mãi</span>
         </Link>
       </Menu.Item>
-      <Menu.Item key='claim'>
+      <Menu.Item key='product'>
         <Link href={routerConstants.product}>
           <TableOutlined />
           <span>Sản phẩm</span>
+        </Link>
+      </Menu.Item>
+      <Menu.Item key='shipper'>
+        <Link href={routerConstants.shipper}>
+          <TableOutlined />
+          <span>Shipper</span>
         </Link>
       </Menu.Item>
     </Menu>

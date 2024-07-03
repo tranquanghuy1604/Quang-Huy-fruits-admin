@@ -19,6 +19,10 @@ const userApi = {
     const url = `/user/get-list-user`;
     return apiClient.get(url);
   },
+  getShipper() {
+    const url = `/user/get-list-shipper`;
+    return apiClient.get(url);
+  },
 };
 
 export const useQueryGetListUser = () => {
@@ -31,6 +35,10 @@ export const useMutationDelete = () => {
 
 export const useMutationLogin = () => {
   return useMutation((params: ParamsLogin) => userApi.login(params));
+};
+
+export const useQueryGetListShipper = () => {
+  return useQuery(['list-shipper'], userApi.getShipper);
 };
 
 export default userApi;

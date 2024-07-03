@@ -1,5 +1,5 @@
 'use client';
-import { useMutationDelete, useQueryGetListUser } from '@/api/userApi';
+import { useMutationDelete, useQueryGetListShipper, useQueryGetListUser } from '@/api/userApi';
 import type { TableProps } from 'antd';
 import { Button, Space, Spin, Table } from 'antd';
 import { useState } from 'react';
@@ -10,23 +10,22 @@ interface DataType {
   userName: string;
   email: string;
   phone: string;
-  gender: string;
-  address: string;
   action?: any;
 }
 
-function TableUser() {
-  const { data, isLoading } = useQueryGetListUser();
-  const dataUser = data as any;
-  const queryClient = useQueryClient();
+function TableShipper() {
+  const { data, isLoading } = useQueryGetListShipper();
+  const listShipper = data as any;
   const { mutate: deleteUser } = useMutationDelete();
+  const queryClient = useQueryClient();
   const handleDeleteUser = (id: any) => {
     deleteUser(id, {
       onSuccess: (data) => {
-        queryClient.invalidateQueries(['list-user']);
+        queryClient.invalidateQueries(['list-shipper']);
       },
     });
   };
+
   const columns: TableProps<DataType>['columns'] = [
     {
       title: 'Mã khách hàng',
@@ -37,7 +36,6 @@ function TableUser() {
       title: 'User Name',
       dataIndex: 'userName',
       key: 'userName',
-      render: (_, record: any) => record?.last_name + ' ' + record?.first_name,
     },
     {
       title: 'Số điện thoại',
@@ -48,18 +46,6 @@ function TableUser() {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
-    },
-    {
-      title: 'Giới tính',
-      dataIndex: 'gender',
-      key: 'gender',
-      render: (_, record: any) => (record?.gender === 'male' ? 'Nam' : 'Nữ'),
-    },
-    {
-      title: 'Địa chỉ',
-      dataIndex: 'address',
-      key: 'address',
-      render: (_, record: any) => record?.ward + ', ' + record?.province,
     },
 
     {
@@ -89,13 +75,13 @@ function TableUser() {
       <Table
         className='border'
         columns={columns}
-        dataSource={dataUser}
+        dataSource={listShipper}
         rowKey='id'
         onChange={handleTableChange}
         pagination={{
           current: pagination.current,
           pageSize: pagination.pageSize,
-          total: dataUser?.total,
+          total: listShipper?.total,
         }}
         loading={
           isLoading && {
@@ -111,4 +97,4 @@ function TableUser() {
   );
 }
 
-export default TableUser;
+export default TableShipper;

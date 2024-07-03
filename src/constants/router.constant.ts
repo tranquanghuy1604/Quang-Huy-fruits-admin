@@ -5,6 +5,7 @@ export const routerConstants = {
   orders: '/don-hang',
   promotion: '/khuyen-mai',
   product: '/san-pham',
+  shipper: '/shipper',
   page404: '/404',
   page500: '/500',
 };
