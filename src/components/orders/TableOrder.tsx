@@ -1,7 +1,7 @@
 'use client';
 import { useMutationChangeDelivery, useMutationDeleteOrder, useQueryGetAllOrder } from '@/api/orderApi';
 import type { TableProps } from 'antd';
-import { Button, Modal, Space, Spin, Table } from 'antd';
+import { Button, Modal, Rate, Space, Spin, Table } from 'antd';
 import moment from 'moment';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -19,6 +19,7 @@ interface DataType {
   status: string;
   product_name: any;
   total_price: number;
+  rate: any;
   rates: any;
   action?: any;
 }
@@ -68,7 +69,7 @@ function TableOrder() {
 
   const columns: TableProps<DataType>['columns'] = [
     {
-      title: 'Order Id',
+      title: 'Mã đơn hàng',
       dataIndex: '_id',
       key: '_id',
       width: 200,
@@ -88,14 +89,14 @@ function TableOrder() {
       render: (customer) => customer.email,
     },
     {
-      title: 'Ho ten',
+      title: 'Họ tên khách hàng',
       dataIndex: 'customer',
       key: 'customer',
       width: 200,
       render: (customer) => customer.fullname,
     },
     {
-      title: 'Ho ten shipper',
+      title: 'Họ tên shipper',
       dataIndex: 'shipper_name',
       key: 'shipper_name',
       width: 200,
@@ -103,13 +104,13 @@ function TableOrder() {
         shipper_name !== null ? `${shipper_name.first_name} ${shipper_name.last_name}` : 'Chưa có người nhận',
     },
     {
-      title: 'Kieu thanh toan',
+      title: 'Kiểu thanh toán',
       dataIndex: 'payment_method',
       key: 'payment_method',
       width: 150,
     },
     {
-      title: 'Mo ta',
+      title: 'Mô tả người dùng',
       dataIndex: 'note',
       key: 'note',
       width: 200,
@@ -134,6 +135,17 @@ function TableOrder() {
       key: 'total_price',
       width: 150,
       render: (total_price) => Number(total_price).toLocaleString('en-US'),
+    },
+    {
+      title: 'Đánh giá',
+      dataIndex: 'rate',
+      key: 'rate',
+      width: 200,
+      render: (_, record) => (
+        <div>
+          <Rate value={record?.rates?.map((item: any) => item.rate)} />
+        </div>
+      ),
     },
     {
       title: 'Đánh giá',
