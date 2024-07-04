@@ -18,6 +18,7 @@ interface DataType {
   created_at: string;
   status: string;
   total_price: number;
+  rates: any;
   action?: any;
 }
 
@@ -116,6 +117,12 @@ function TableOrder() {
       dataIndex: 'total_price',
       key: 'total_price',
       render: (total_price) => Number(total_price).toLocaleString('en-US'),
+    },
+    {
+      title: 'Đánh giá',
+      dataIndex: 'rates',
+      key: 'rates',
+      render: (rates) => (rates.length === 0 ? 'Chưa có đánh giá' : rates?.map((rate: any) => rate.content)),
     },
 
     {
