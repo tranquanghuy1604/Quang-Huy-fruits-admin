@@ -1,9 +1,10 @@
 'use client';
 import { useMutationDelete, useQueryGetListUser } from '@/api/userApi';
 import type { TableProps } from 'antd';
-import { Button, Space, Spin, Table } from 'antd';
+import { Button, Modal, Space, Spin, Table } from 'antd';
 import { useState } from 'react';
 import { useQueryClient } from 'react-query';
+import FormEditUser from './FormEditUser';
 
 interface DataType {
   _id: number;
@@ -16,6 +17,8 @@ interface DataType {
 }
 
 function TableUser() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<DataType | null>(null);
   const { data, isLoading } = useQueryGetListUser();
   const dataUser = data as any;
   const queryClient = useQueryClient();
@@ -27,6 +30,11 @@ function TableUser() {
       },
     });
   };
+  const handleEditUser = (record: DataType) => {
+    setSelectedUser(record);
+    setIsModalOpen(true);
+  };
+
   const columns: TableProps<DataType>['columns'] = [
     {
       title: 'Mã khách hàng',
@@ -69,7 +77,9 @@ function TableUser() {
       className: 'max-w-[150px]',
       render: (_, record) => (
         <Space size='middle'>
-          <Button type='primary'>Sửa</Button>
+          <Button type='primary' onClick={() => handleEditUser(record)}>
+            Sửa
+          </Button>
           <Button type='primary' onClick={() => handleDeleteUser(record._id)}>
             Xóa
           </Button>
@@ -107,6 +117,18 @@ function TableUser() {
           }
         }
       />
+      <Modal
+        destroyOnClose={true}
+        centered
+        title='Sửa Sản Phẩm'
+        open={isModalOpen}
+        footer={null}
+        onOk={() => setIsModalOpen(false)}
+        onCancel={() => setIsModalOpen(false)}
+        width={600}
+      >
+        <FormEditUser item={selectedUser} handleCancel={() => setIsModalOpen(false)} />
+      </Modal>
     </div>
   );
 }
