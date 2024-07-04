@@ -19,7 +19,7 @@ export const SideBar: React.FC = () => {
   return (
     <Menu
       onClick={(e) => hanldeSelectMenu(e)}
-      className='min-h-[91vh] max-w-[300px]'
+      className='min-h-[91vh] max-w-[15%]'
       theme='dark'
       defaultSelectedKeys={['seasons']}
       selectedKeys={[`${select}`]}

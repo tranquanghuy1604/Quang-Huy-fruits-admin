@@ -191,7 +191,6 @@ function TableOrder() {
             ),
           }
         }
-        scroll={{ x: '100vw' }}
       />
       <Modal
         destroyOnClose={true}

@@ -16,6 +16,10 @@
   }
 }
 
+.ant-table::-webkit-scrollbar {
+  height: 8px;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: #fff;
