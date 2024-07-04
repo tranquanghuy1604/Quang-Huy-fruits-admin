@@ -17,6 +17,7 @@ interface DataType {
   note: string;
   created_at: string;
   status: string;
+  product_name: any;
   total_price: number;
   rates: any;
   action?: any;
@@ -70,23 +71,34 @@ function TableOrder() {
       title: 'Order Id',
       dataIndex: '_id',
       key: '_id',
+      width: 200,
+    },
+    {
+      title: 'Đơn hàng',
+      dataIndex: 'product_name',
+      key: 'product_name',
+      width: 200,
+      render: (product) => product.join(', '),
     },
     {
       title: 'Email',
       dataIndex: 'customer',
       key: 'customer',
+      width: 200,
       render: (customer) => customer.email,
     },
     {
       title: 'Ho ten',
       dataIndex: 'customer',
       key: 'customer',
+      width: 200,
       render: (customer) => customer.fullname,
     },
     {
       title: 'Ho ten shipper',
       dataIndex: 'shipper_name',
       key: 'shipper_name',
+      width: 200,
       render: (shipper_name) =>
         shipper_name !== null ? `${shipper_name.first_name} ${shipper_name.last_name}` : 'Chưa có người nhận',
     },
@@ -94,34 +106,40 @@ function TableOrder() {
       title: 'Kieu thanh toan',
       dataIndex: 'payment_method',
       key: 'payment_method',
+      width: 150,
     },
     {
       title: 'Mo ta',
       dataIndex: 'note',
       key: 'note',
+      width: 200,
     },
     {
       title: 'Ngay khoi tao',
       dataIndex: 'created_at',
       key: 'created_at',
+      width: 150,
       render: (created_at) => moment(created_at).format('YYYY-MM-DD'),
     },
     {
       title: 'Trang thai',
       dataIndex: 'status',
       key: 'status',
+      width: 200,
       render: (status) => getTagColor(status),
     },
     {
       title: 'Tổng tiền',
       dataIndex: 'total_price',
       key: 'total_price',
+      width: 150,
       render: (total_price) => Number(total_price).toLocaleString('en-US'),
     },
     {
       title: 'Đánh giá',
       dataIndex: 'rates',
       key: 'rates',
+      width: 200,
       render: (rates) => (rates.length === 0 ? 'Chưa có đánh giá' : rates?.map((rate: any) => rate.content)),
     },
 
@@ -129,7 +147,6 @@ function TableOrder() {
       title: 'Action',
       key: 'action',
       align: 'center',
-      className: 'max-w-[200px]',
       render: (_, record) => (
         <Space size='middle'>
           <Button type='primary' onClick={() => handleOrder(record)}>
@@ -147,6 +164,7 @@ function TableOrder() {
           </Button>
         </Space>
       ),
+      width: 300,
     },
   ];
 
@@ -173,6 +191,7 @@ function TableOrder() {
             ),
           }
         }
+        scroll={{ x: '100vw' }}
       />
       <Modal
         destroyOnClose={true}

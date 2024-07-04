@@ -32,9 +32,9 @@ export default function RootLayout({
         <Toaster position='top-right' />
         <ConfigProvider>
           <Header />
-          <div className='flex flex-row min-h-screen text-[#000]'>
+          <div className='flex flex-row min-h-screen text-[#000] overflow-auto'>
             <SideBar />
-            <div className='p-16 flex-1'>{children}</div>
+            <div className='p-8 flex-1'>{children}</div>
           </div>
         </ConfigProvider>
       </body>
