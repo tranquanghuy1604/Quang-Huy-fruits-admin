@@ -78,7 +78,7 @@ function TableOrder() {
       dataIndex: 'product_name',
       key: 'product_name',
       width: 200,
-      render: (product) => product.join(', '),
+      render: (product) => product.map((item: any) => item.productName + ' x ' + item.quantity).join(', '),
     },
     {
       title: 'Email',
