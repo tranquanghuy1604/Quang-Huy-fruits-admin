@@ -43,7 +43,7 @@ const FormCreateProduct = (props: Props) => {
     const formData = new FormData();
     formData.append('name', values.name);
     formData.append('category_id', values.categoryId);
-    formData.append('cost_price', values.costPrice);
+    formData.append('cost_price', '100000');
     formData.append('price', values.price);
     formData.append('amount', values.amount);
     formData.append('description', values.description);
@@ -92,14 +92,6 @@ const FormCreateProduct = (props: Props) => {
             <Select.Option value={dataCategory && dataCategory[0]?._id}>Nhập khẩu</Select.Option>
             <Select.Option value={dataCategory && dataCategory[1]?._id}>Xuất khẩu</Select.Option>
           </Select>
-        </Form.Item>
-
-        <Form.Item
-          label='Cost Price'
-          name='costPrice'
-          rules={[{ required: true, message: 'Please input the cost price!' }]}
-        >
-          <Input type='number' value={costPrice} onChange={(e) => setCostPrice(e.target.value)} />
         </Form.Item>
 
         <Form.Item label='Price' name='price' rules={[{ required: true, message: 'Please input the price!' }]}>

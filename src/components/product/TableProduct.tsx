@@ -12,7 +12,6 @@ interface DataType {
   name: string;
   category_id: string;
   _id: string;
-  cost_price: number;
   price: number;
   amount: number;
   description: string;
@@ -61,8 +60,7 @@ function TableProduct() {
       },
     },
     { title: 'Mã sản phẩm', dataIndex: '_id', key: '_id' },
-    { title: 'Cost Price', dataIndex: 'cost_price', key: 'cost_price', render: (costPrice) => FormatNumber(costPrice) },
-    { title: 'Giá', dataIndex: 'price', key: 'price', render: (price) => FormatNumber(price) },
+    { title: 'Giá tiền', dataIndex: 'price', key: 'price', render: (price) => FormatNumber(price) },
     { title: 'Số lượng', dataIndex: 'amount', key: 'amount' },
     { title: 'Mô tả', dataIndex: 'description', key: 'description' },
     {

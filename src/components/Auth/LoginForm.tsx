@@ -14,7 +14,7 @@ interface ValueLogin {
 export default function LoginForm() {
   const [logged, setLogged] = useRecoilState(loggedState);
   const router = useRouter();
-  const { mutate: login } = useMutationLogin();
+  const { mutate: login, isLoading } = useMutationLogin();
 
   console.log(logged);
 
@@ -27,6 +27,9 @@ export default function LoginForm() {
           toast.success('Đăng nhập thành công');
           localStorage.setItem('authToken-admin', data?.token);
           router.push('/nguoi-dung');
+        },
+        onError: () => {
+          toast.error('Đăng nhập thất bại');
         },
       },
     );
@@ -51,7 +54,7 @@ export default function LoginForm() {
           </Form.Item>
 
           <Form.Item>
-            <Button type='primary' htmlType='submit' className='login-form-button w-full'>
+            <Button loading={isLoading} type='primary' htmlType='submit' className='login-form-button w-full'>
               Login
             </Button>
           </Form.Item>
