@@ -3,4 +3,5 @@ export enum StatusDeliveryEnum {
   waiting_delivery = 'waiting-delivery',
   pending = 'pending',
   finish = 'finish',
+  deleted = 'deleted',
 }

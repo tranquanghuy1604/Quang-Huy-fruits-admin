@@ -10,5 +10,7 @@ export const getTagColor = (status: string) => {
       return 'Đang giao hàng';
     case StatusDeliveryEnum.finish:
       return 'Đã giao hàng';
+    case StatusDeliveryEnum.deleted:
+      return 'Đã hủy đơn';
   }
 };
