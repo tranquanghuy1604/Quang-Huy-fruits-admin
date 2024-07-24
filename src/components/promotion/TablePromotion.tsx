@@ -62,7 +62,11 @@ function TablePromotion() {
       className: 'max-w-[150px]',
       render: (_, record) => (
         <Space size='middle'>
-          <Button type='primary' onClick={() => handlePromotion(record)}>
+          <Button
+            disabled={moment(record?.endDate).format('YYYY-MM-DD') < moment(Date.now()).format('YYYY-MM-DD')}
+            type='primary'
+            onClick={() => handlePromotion(record)}
+          >
             Sửa
           </Button>
           <Button type='primary' onClick={() => handleDeletePromotion(record?._id)}>

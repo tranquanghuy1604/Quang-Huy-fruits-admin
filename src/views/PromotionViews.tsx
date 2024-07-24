@@ -9,7 +9,7 @@ export default function PromotionViews() {
   return (
     <div>
       <div className='flex justify-between w-full'>
-        <p className='font-bold text-3xl'>Người dùng</p>
+        <p className='font-bold text-3xl'>Khuyến mãi</p>
         <Button type='primary' onClick={() => setIsModalOpen(true)}>
           Thêm Khuyến mãi
         </Button>

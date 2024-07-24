@@ -3,7 +3,7 @@ import apiClient from './apiClient';
 
 const promotionApi = {
   getAllPromotion() {
-    const url = '/promotion';
+    const url = '/promotion/list-promotion';
     return apiClient.get(url);
   },
   createPromotion(params: any) {
