@@ -42,7 +42,7 @@ function TableUser() {
       key: '_id',
     },
     {
-      title: 'User Name',
+      title: 'Tên khách hàng',
       dataIndex: 'userName',
       key: 'userName',
       render: (_, record: any) => record?.last_name + ' ' + record?.first_name,
@@ -71,7 +71,7 @@ function TableUser() {
     },
 
     {
-      title: 'Action',
+      title: 'Hành động',
       key: 'action',
       align: 'center',
       className: 'max-w-[150px]',

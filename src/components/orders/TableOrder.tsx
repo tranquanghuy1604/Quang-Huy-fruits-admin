@@ -96,7 +96,7 @@ function TableOrder() {
       render: (customer) => customer.fullname,
     },
     {
-      title: 'Họ tên shipper',
+      title: 'Họ tên người giao hàng',
       dataIndex: 'shipper_name',
       key: 'shipper_name',
       width: 200,
@@ -116,14 +116,14 @@ function TableOrder() {
       width: 200,
     },
     {
-      title: 'Ngay khoi tao',
+      title: 'Ngay khởi tạo',
       dataIndex: 'created_at',
       key: 'created_at',
       width: 150,
       render: (created_at) => moment(created_at).format('YYYY-MM-DD'),
     },
     {
-      title: 'Trang thai',
+      title: 'Trạng thái',
       dataIndex: 'status',
       key: 'status',
       width: 200,
@@ -156,7 +156,7 @@ function TableOrder() {
     },
 
     {
-      title: 'Action',
+      title: 'Hành động',
       key: 'action',
       align: 'center',
       render: (_, record) => (

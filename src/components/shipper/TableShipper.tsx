@@ -40,7 +40,7 @@ function TableShipper() {
       key: '_id',
     },
     {
-      title: 'User Name',
+      title: 'Tên người giao hàng',
       dataIndex: 'userName',
       key: 'userName',
       render: (_, record: any) => record?.last_name + ' ' + record?.first_name,
@@ -57,7 +57,7 @@ function TableShipper() {
     },
 
     {
-      title: 'Action',
+      title: 'Hành động',
       key: 'action',
       align: 'center',
       className: 'max-w-[150px]',

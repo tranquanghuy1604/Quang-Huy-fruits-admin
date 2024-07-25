@@ -25,7 +25,7 @@ function TablePromotion() {
   const listPromotion = data as any;
   const columns: TableProps<DataType>['columns'] = [
     {
-      title: 'Ma khuyen mai',
+      title: 'Mã khuyến mãi',
       dataIndex: '_id',
       key: '_id',
     },
@@ -41,7 +41,7 @@ function TablePromotion() {
       render: (startDate) => moment(startDate).format('YYYY-MM-DD'),
     },
     {
-      title: 'Ngày bắt đầu',
+      title: 'Ngày kết thúc',
       dataIndex: 'endDate',
       key: 'endDate',
       render: (endDate) => moment(endDate).format('YYYY-MM-DD'),
@@ -56,7 +56,7 @@ function TablePromotion() {
       },
     },
     {
-      title: 'Action',
+      title: 'Hành động',
       key: 'action',
       align: 'center',
       className: 'max-w-[150px]',

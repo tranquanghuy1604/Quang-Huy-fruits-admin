@@ -64,7 +64,7 @@ function TableProduct() {
     { title: 'Số lượng', dataIndex: 'amount', key: 'amount' },
     { title: 'Mô tả', dataIndex: 'description', key: 'description' },
     {
-      title: 'Images',
+      title: 'Ảnh',
       dataIndex: 'images',
       key: 'images',
       render: (image: any) => (
@@ -74,7 +74,7 @@ function TableProduct() {
       ),
     },
     {
-      title: 'Action',
+      title: 'Hành động',
       key: 'action',
       align: 'center',
       render: (_, record) => (

@@ -52,7 +52,7 @@ export const SideBar: React.FC = () => {
       <Menu.Item key='shipper'>
         <Link href={routerConstants.shipper}>
           <TableOutlined />
-          <span>Shipper</span>
+          <span>Người giao hàng</span>
         </Link>
       </Menu.Item>
     </Menu>
